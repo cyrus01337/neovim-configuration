@@ -47,3 +47,6 @@ opt.formatoptions = "c"
 opt.fileformat = "unix"
 opt.fileformats = "unix"
 opt.fixendofline = true
+
+-- disable luarocks support
+opt.rocks.enabled = false
