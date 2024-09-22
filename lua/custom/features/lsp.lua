@@ -227,7 +227,9 @@ return {
 
             cmp.setup({
                 enabled = function()
-                    if mode.is(mode.COMMAND_LINE) then return true end
+                    if mode.is(mode.COMMAND_LINE) then
+                        return true
+                    end
 
                     return not cmp_context.in_treesitter_capture("comment")
                         and not cmp_context.in_syntax_group("Comment")
@@ -238,13 +240,17 @@ return {
                 formatting = lsp.cmp_format({ details = true }),
                 mapping = mapping,
                 snippets = {
-                    expand = function(args) luasnip.lsp_expand(args.body) end,
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
                 },
                 sources = cmp.config.sources({
                     { name = "path" },
                     {
                         name = "nvim_lsp",
-                        entry_filter = function(entry) return cmp.lsp.CompletionItemKind.Text ~= entry:get_kind() end,
+                        entry_filter = function(entry)
+                            return cmp.lsp.CompletionItemKind.Text ~= entry:get_kind()
+                        end,
                     },
 
                     { name = "luasnip" },
@@ -285,7 +291,9 @@ return {
             local mason_lsp_configuration = require("mason-lspconfig")
 
             lsp.extend_lspconfig()
-            lsp.on_attach(function(_, buffer) lsp.default_keymaps({ buffer = buffer }) end)
+            lsp.on_attach(function(_, buffer)
+                lsp.default_keymaps({ buffer = buffer })
+            end)
 
             mason_lsp_configuration.setup({
                 ensure_installed = {
@@ -296,7 +304,7 @@ return {
                     "cssls",
                     "tailwindcss",
                     "eslint",
-                    "tsserver",
+                    "ts_ls",
                     "astro",
                     "mdx_analyzer",
 
