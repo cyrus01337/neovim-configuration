@@ -289,6 +289,10 @@ return {
         config = function()
             local lsp = require("lsp-zero")
             local mason_lsp_configuration = require("mason-lspconfig")
+            local neovim_completion_lsp = require("cmp_nvim_lsp")
+            local neovim_lsp_configuration = require("lspconfig")
+
+            local capabilities = neovim_completion_lsp.default_capabilities()
 
             lsp.extend_lspconfig()
             lsp.on_attach(function(_, buffer)
@@ -304,7 +308,7 @@ return {
                     "cssls",
                     "tailwindcss",
                     "eslint",
-                    "ts_ls",
+                    "tsserver",
                     "astro",
                     "mdx_analyzer",
 
@@ -334,6 +338,19 @@ return {
                     "markdown_oxide",
                 },
                 handlers = { setup_language_server },
+            })
+            mason_lsp_configuration.setup_handlers({
+                function(server)
+                    if server == "tsserver" then
+                        server = "ts_ls"
+                    end
+
+                    local configuration = neovim_lsp_configuration[server]
+
+                    configuration.setup({
+                        capabilities = capabilities,
+                    })
+                end,
             })
         end,
     },
