@@ -1,4 +1,18 @@
-local function is_always_hidden(name, _) return name == ".." or name:match("^.zcompdump.*") or name:match("^.Trash-.*") end
+local HIDDEN_OBJECT_PATHS = {
+    "^.zcompdump.*",
+    "^.Trash-.*",
+    "^.git",
+}
+
+local function is_always_hidden(name, _)
+    if name == ".." then return true end
+
+    for _, path in ipairs(HIDDEN_OBJECT_PATHS) do
+        if name:match(path) then return true end
+    end
+
+    return false
+end
 
 return {
     "stevearc/oil.nvim",
