@@ -3,9 +3,10 @@ return {
         "tpope/vim-fugitive",
         keys = {
             { "<leader>g", "<CMD>Git<CR>", remap = true },
+            { "<leader>gi", "<CMD>Git init<CR>" },
             { "<leader>gc", "<CMD>Git commit<CR>" },
-            { "<leader>gpl", "<CMD>Git pull<CR>" },
-            { "<leader>gps", "<CMD>Git push<CR>" },
+            { "<leader>gpl", ":Git pull " },
+            { "<leader>gps", ":Git push " },
         },
     },
     {
@@ -14,7 +15,7 @@ return {
             "nvim-telescope/telescope.nvim",
         },
         keys = {
-            { "<leader>gi", "<CMD>Gitignore<CR>" },
+            { "<leader>ggi", "<CMD>Gitignore<CR>" },
         },
         config = true,
     },
