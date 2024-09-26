@@ -9,6 +9,6 @@ return {
         local telescope = require("telescope")
 
         telescope.load_extension("software-licenses")
-        vim.keymap.set(mode.NORMAL, "<leader>fl", "<CMD>Telescope software-licenses find<CR>")
+        vim.keymap.set(mode.NORMAL, "<leader>gl", "<CMD>Telescope software-licenses find<CR>")
     end,
 }
