@@ -1,14 +1,18 @@
 local HIDDEN_OBJECT_PATHS = {
     "^.zcompdump.*",
     "^.Trash-.*",
-    "^.git",
+    "^.git%",
 }
 
 local function is_always_hidden(name, _)
-    if name == ".." then return true end
+    if name == ".." then
+        return true
+    end
 
     for _, path in ipairs(HIDDEN_OBJECT_PATHS) do
-        if name:match(path) then return true end
+        if name:match(path) then
+            return true
+        end
     end
 
     return false
