@@ -71,7 +71,7 @@ set({ mode.INSERT, mode.VISUAL }, "<C-s>", "<CMD>update<CR>", { remap = true })
 
 -- close buffer
 set(mode.ALL, "<C-w>", "<CMD>bdelete<CR>")
-set(mode.ALL, "<leader>w", "<CMD>bdelete<CR>")
+set({ mode.NORMAL, mode.VISUAL }, "<leader>w", "<CMD>bdelete<CR>")
 
 -- easy case conversion
 set(mode.VISUAL, "l", "gu", { remap = true })
