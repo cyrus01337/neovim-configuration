@@ -150,9 +150,6 @@ set(mode.ALL, "<M-Down>", function()
     reset_cursor_position()
 end)
 
--- comment toggling
-set({ mode.NORMAL, mode.INSERT, mode.VISUAL }, "<C-_>", "<CMD>norm gcc<CR>")
-
 -- rebind leader+o to output view
 set(mode.NORMAL, "<leader>o", "<CMD>messages<CR>", { remap = true })
 
