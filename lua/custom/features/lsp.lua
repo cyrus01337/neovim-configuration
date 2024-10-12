@@ -204,14 +204,18 @@ return {
                 extra = false,
             },
             opleader = {
-                line = "<Nop>",
-                block = "<Nop>",
+                line = "cl",
+                block = "cb",
             },
             toggler = {
-                line = "<C-_>",
-                block = "<Nop>",
+                line = "ctl",
+                block = "ctb",
             },
         },
+        init = function()
+            vim.keymap.set({ mode.NORMAL, mode.INSERT }, "<C-_>", "<Plug>(comment_toggle_linewise_current)")
+            vim.keymap.set(mode.VISUAL, "<C-_>", "<Plug>(comment_toggle_linewise_visual)")
+        end,
     },
     {
         "L3MON4D3/LuaSnip",
