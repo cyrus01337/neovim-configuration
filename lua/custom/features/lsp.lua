@@ -39,6 +39,21 @@ local function setup_language_server(serverName)
     server_found.setup(options)
 end
 
+local function lsp_attach(_, buffer_number)
+    local options = { buffer = buffer_number }
+
+    vim.keymap.set("n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>", options)
+    vim.keymap.set("n", "gtd", "<CMD>lua vim.lsp.buf.definition()<CR>", options)
+    vim.keymap.set("n", "gtD", "<CMD>lua vim.lsp.buf.declaration()<CR>", options)
+    vim.keymap.set("n", "gti", "<CMD>lua vim.lsp.buf.implementation()<CR>", options)
+    vim.keymap.set("n", "gto", "<CMD>lua vim.lsp.buf.type_definition()<CR>", options)
+    vim.keymap.set("n", "gtr", "<CMD>lua vim.lsp.buf.references()<CR>", options)
+    vim.keymap.set("n", "gts", "<CMD>lua vim.lsp.buf.signature_help()<CR>", options)
+    vim.keymap.set("n", "<F2>", "<CMD>lua vim.lsp.buf.rename()<CR>", options)
+    vim.keymap.set({ mode.NORMAL, "x" }, "<F3>", "<CMD>lua vim.lsp.buf.format({async = true})<CR>", options)
+    vim.keymap.set("n", "<F4>", "<CMD>lua vim.lsp.buf.code_action()<CR>", options)
+end
+
 return {
     {
         "nvim-treesitter/nvim-treesitter",
@@ -183,6 +198,22 @@ return {
         config = true,
     },
     {
+        "numToStr/Comment.nvim",
+        opts = {
+            mappings = {
+                extra = false,
+            },
+            opleader = {
+                line = "<Nop>",
+                block = "<Nop>",
+            },
+            toggler = {
+                line = "<C-_>",
+                block = "<Nop>",
+            },
+        },
+    },
+    {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
         build = "make install_jsregexp",
@@ -205,6 +236,9 @@ return {
             local cmp_context = require("cmp.config.context")
 
             local confirm = cmp.mapping({
+                s = cmp.mapping.confirm({ select = true }),
+                c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+
                 i = function(fallback)
                     if cmp.visible() then
                         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
@@ -212,9 +246,6 @@ return {
                         fallback()
                     end
                 end,
-
-                s = cmp.mapping.confirm({ select = true }),
-                c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
             })
             local mapping = cmp.mapping.preset.insert({
                 ["<C-Space>"] = cmp.mapping.complete(),
@@ -227,7 +258,9 @@ return {
 
             cmp.setup({
                 enabled = function()
-                    if mode.is(mode.COMMAND_LINE) then return true end
+                    if mode.is(mode.COMMAND_LINE) then
+                        return true
+                    end
 
                     return not cmp_context.in_treesitter_capture("comment")
                         and not cmp_context.in_syntax_group("Comment")
@@ -238,13 +271,17 @@ return {
                 formatting = lsp.cmp_format({ details = true }),
                 mapping = mapping,
                 snippets = {
-                    expand = function(args) luasnip.lsp_expand(args.body) end,
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
                 },
                 sources = cmp.config.sources({
                     { name = "path" },
                     {
                         name = "nvim_lsp",
-                        entry_filter = function(entry) return cmp.lsp.CompletionItemKind.Text ~= entry:get_kind() end,
+                        entry_filter = function(entry)
+                            return cmp.lsp.CompletionItemKind.Text ~= entry:get_kind()
+                        end,
                     },
 
                     { name = "luasnip" },
@@ -288,8 +325,14 @@ return {
 
             local capabilities = neovim_completion_lsp.default_capabilities()
 
-            lsp.extend_lspconfig()
-            lsp.on_attach(function(_, buffer) lsp.default_keymaps({ buffer = buffer }) end)
+            lsp.extend_lspconfig({
+                capabilities = capabilities,
+                lsp_attach = lsp_attach,
+                sign_text = true,
+            })
+            lsp.on_attach(function(_, buffer)
+                lsp.default_keymaps({ buffer = buffer })
+            end)
 
             mason_lsp_configuration.setup({
                 ensure_installed = {
@@ -300,7 +343,7 @@ return {
                     "cssls",
                     "tailwindcss",
                     "eslint",
-                    "tsserver",
+                    "ts_ls",
                     "astro",
                     "mdx_analyzer",
 
@@ -333,9 +376,9 @@ return {
             })
             mason_lsp_configuration.setup_handlers({
                 function(server)
-                    if server == "tsserver" then
-                        server = "ts_ls"
-                    end
+                    -- if server == "tsserver" then
+                    --     server = "ts_ls"
+                    -- end
 
                     local configuration = neovim_lsp_configuration[server]
 
