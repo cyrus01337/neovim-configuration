@@ -2,11 +2,17 @@ return {
     {
         "tpope/vim-fugitive",
         keys = {
-            { "<leader>g", "<CMD>Git<CR>", remap = true },
+            { "<leader>ga", "<CMD>Git<CR>", remap = true },
+            { "<leader>gch", "<CMD>Git checkout " },
+            { "<leader>gco", "<CMD>Git commit<CR>" },
             { "<leader>gi", "<CMD>Git init<CR>" },
-            { "<leader>gc", "<CMD>Git commit<CR>" },
-            { "<leader>gpl", ":Git pull " },
-            { "<leader>gps", ":Git push " },
+            { "<leader>gism", "<CMD>Git submodule update --init --recursive<CR>" },
+            { "<leader>gm", "<CMD>Git merge " },
+            { "<leader>gra", "<CMD>Git remote add " },
+            { "<leader>gpl", "<CMD>Git pull " },
+            { "<leader>gps", "<CMD>Git push " },
+            { "<leader>gsm", "<CMD>Git submodule " },
+            { "<leader>gusm", "<CMD>Git submodule update --recursive --remote" },
         },
     },
     {
