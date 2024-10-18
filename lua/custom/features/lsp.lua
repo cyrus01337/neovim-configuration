@@ -399,7 +399,6 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         build = {
-            "which stylua &> /dev/null || cargo install stylua --features lua54",
             ":TSInstall lua",
         },
         opts = {
