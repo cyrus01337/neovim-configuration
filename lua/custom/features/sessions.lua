@@ -10,6 +10,7 @@ return {
             "~/.config/{nvim,zsh}/",
             "~/{bin,Playground}/",
             "~/Projects/*/*/",
+            "/workspace",
         },
         cwd_change_handling = {
             restore_upcoming_session = true,
