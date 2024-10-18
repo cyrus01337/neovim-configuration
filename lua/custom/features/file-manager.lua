@@ -50,5 +50,6 @@ return {
             is_always_hidden = is_always_hidden,
             show_hidden = true,
         },
+        watch_for_changes = false,
     },
 }
