@@ -394,6 +394,12 @@ return {
         end,
     },
     {
+        "nvim-ts-autotag",
+        opts = {
+            enable_close_on_slash = true,
+        },
+    },
+    {
         "stevearc/conform.nvim",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
