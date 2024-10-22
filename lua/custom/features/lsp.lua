@@ -418,6 +418,7 @@ return {
             formatters_by_ft = {
                 javascript = { "prettier" },
                 lua = { "stylua" },
+                php = { "php-cs-fixer" },
                 python = { "isort", "black" },
                 typescript = { "prettier" },
             },
