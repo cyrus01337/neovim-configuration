@@ -400,7 +400,7 @@ return {
         end,
     },
     {
-        "nvim-ts-autotag",
+        "windwp/nvim-ts-autotag",
         opts = {
             enable_close_on_slash = true,
         },
