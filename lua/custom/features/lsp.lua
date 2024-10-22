@@ -416,9 +416,9 @@ return {
         },
         opts = {
             formatters_by_ft = {
+                javascript = { "prettier" },
                 lua = { "stylua" },
                 python = { "isort", "black" },
-                javascript = { "prettier" },
                 typescript = { "prettier" },
             },
             format_on_save = {
