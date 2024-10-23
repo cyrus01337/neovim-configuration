@@ -399,12 +399,12 @@ return {
             })
         end,
     },
-    {
-        "windwp/nvim-ts-autotag",
-        opts = {
-            enable_close_on_slash = true,
-        },
-    },
+    -- {
+    --     "windwp/nvim-ts-autotag",
+    --     opts = {
+    --         enable_close_on_slash = true,
+    --     },
+    -- },
     {
         "stevearc/conform.nvim",
         dependencies = {
