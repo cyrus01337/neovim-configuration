@@ -10,10 +10,10 @@ return {
             "TmuxNavigateRight",
         },
         keys = {
-            { mode.NORMAL, "<C-Up>", "<CMD>wincmd Up" },
-            { mode.NORMAL, "<C-Down>", "<CMD>wincmd Down" },
-            { mode.NORMAL, "<C-Left>", "<CMD>wincmd Left" },
-            { mode.NORMAL, "<C-Right>", "<CMD>wincmd Right" },
+            { mode.NORMAL, "<leader><Up>", "<CMD>TmuxNavigateUp<CR>" },
+            { mode.NORMAL, "<leader><Down>", "<CMD>TmuxNavigateDown<CR>" },
+            { mode.NORMAL, "<leader><Left>", "<CMD>TmuxNavigateLeft<CR>" },
+            { mode.NORMAL, "<leader><Right>", "<CMD>TmuxNavigateRight<CR>" },
         },
     },
     {
