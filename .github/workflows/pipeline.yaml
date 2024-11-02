@@ -10,6 +10,12 @@ jobs:
         name: Dispatch build event
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
+              name: Checkout repository
+              with:
+                  ref: ${{ github.head_ref }}
+                  fetch-depth: 0
+
             - name: Parse short commit hash
               id: commit-hash
               run: |
