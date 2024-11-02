@@ -10,10 +10,6 @@ jobs:
         name: Dispatch build event
         runs-on: ubuntu-latest
         steps:
-            - name: Get short commit hash
-              run: |
-                echo "SHORT_COMMIT_HASH=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
-
             - name: Dispatch
               run: |
                 curl -L \
@@ -22,4 +18,4 @@ jobs:
                     -H "Authorization: Bearer ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}" \
                     -H "X-GitHub-Api-Version: 2022-11-28" \
                     https://api.github.com/repos/cyrus01337/neovim-devcontainer/dispatches \
-                    -d '{"event_type":"Received build request from neovim-configuration (${{ github.sha }})"}'
+                    -d '{"event_type":"Received build request from neovim-configuration ($(git rev-parse --short ${{ github.sha }}))"}'
