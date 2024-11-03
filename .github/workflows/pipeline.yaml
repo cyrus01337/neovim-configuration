@@ -3,6 +3,11 @@ name: Dispatch build event to cyrus01337/neovim-devcontainer
 on:
     push:
         branches: ["main"]
+        paths:
+            - "lua/**"
+            - ".stylua.toml"
+            - "init.lua"
+            - "lazy-lock.json"
     workflow_dispatch:
 
 jobs:
