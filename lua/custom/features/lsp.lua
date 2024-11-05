@@ -359,7 +359,7 @@ return {
                     --- back-end
                     "phpactor",
                     "phpstan",
-                    "php_cs_fixer",
+                    "php-cs-fixer",
                     "sqlls",
 
                     -- dev-ops
