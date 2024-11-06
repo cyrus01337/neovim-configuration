@@ -94,11 +94,6 @@ set({ mode.NORMAL, mode.VISUAL }, "yp", function()
     reset_cursor_column()
 end)
 
--- select line
-set({ mode.NORMAL, mode.VISUAL }, "<C-a>", function()
-    vim.cmd("normal! V")
-end)
-
 -- select all
 set({ mode.NORMAL, mode.VISUAL }, "<C-a><C-a>", function()
     -- vim motion to go to the start of a file, enter visual mode, then go to
@@ -126,30 +121,33 @@ set(mode.NORMAL, "<leader>x", function()
 end)
 
 -- line-shifting
-set(mode.ALL, "<M-Up>", function()
-    local reset_cursor_column = save_cursor_column()
-    local mode_information = vim.api.nvim_get_mode()
+set(mode.INSERT, "<M-Up>", function()
+    local current_window = vim.api.nvim_get_current_win()
+    local current_cursor_row, current_cursor_column = unpack(vim.api.nvim_win_get_cursor(current_window))
+    local current_buffer = vim.api.nvim_get_current_buf()
+    local current_line = vim.api.nvim_get_current_line()
+    local previous_line =
+        vim.api.nvim_buf_get_lines(current_buffer, current_cursor_row - 2, current_cursor_row - 1, false)[1]
 
-    if mode_information.mode == mode.NORMAL then
-        vim.cmd("normal kddpk")
-    elseif mode_information.mode == mode.VISUAL_LINE then
-        print("Line-shifting in visual line mode is unsupported")
-    end
-
-    reset_cursor_column()
+    vim.api.nvim_buf_set_lines(current_buffer, current_cursor_row - 2, current_cursor_row, false, {
+        current_line,
+        previous_line,
+    })
+    vim.api.nvim_win_set_cursor(current_window, { current_cursor_row - 1, current_cursor_column })
 end)
 
-set(mode.ALL, "<M-Down>", function()
-    local reset_cursor_position = save_cursor_column()
-    local mode_information = vim.api.nvim_get_mode()
+set(mode.INSERT, "<M-Down>", function()
+    local current_window = vim.api.nvim_get_current_win()
+    local current_cursor_row, current_cursor_column = unpack(vim.api.nvim_win_get_cursor(current_window))
+    local current_buffer = vim.api.nvim_get_current_buf()
+    local current_line = vim.api.nvim_get_current_line()
+    local next_line = vim.api.nvim_buf_get_lines(current_buffer, current_cursor_row, current_cursor_row + 1, false)[1]
 
-    if mode_information.mode == mode.NORMAL then
-        vim.cmd("normal ddp")
-    elseif mode_information.mode == mode.VISUAL_LINE then
-        print("Line-shifting in visual line mode is unsupported")
-    end
-
-    reset_cursor_position()
+    vim.api.nvim_buf_set_lines(current_buffer, current_cursor_row - 1, current_cursor_row + 1, false, {
+        next_line,
+        current_line,
+    })
+    vim.api.nvim_win_set_cursor(current_window, { current_cursor_row + 1, current_cursor_column })
 end)
 
 -- rebind leader+o to output view
