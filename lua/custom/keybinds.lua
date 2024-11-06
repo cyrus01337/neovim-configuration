@@ -95,7 +95,7 @@ set({ mode.NORMAL, mode.VISUAL }, "yp", function()
 end)
 
 -- select all
-set({ mode.NORMAL, mode.VISUAL }, "<C-a><C-a>", function()
+set({ mode.NORMAL, mode.VISUAL }, "<C-a>", function()
     -- vim motion to go to the start of a file, enter visual mode, then go to
     -- the end of the file
     --
