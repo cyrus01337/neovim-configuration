@@ -371,6 +371,7 @@ return {
                     "pyright",
                     "sourcery",
                     "lua_ls",
+                    "nixpkgs-fmt",
 
                     -- general
                     "gopls",
