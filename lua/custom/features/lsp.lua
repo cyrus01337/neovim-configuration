@@ -358,8 +358,6 @@ return {
 
                     --- back-end
                     "phpactor",
-                    "phpstan",
-                    "php-cs-fixer",
                     "sqlls",
 
                     -- dev-ops
