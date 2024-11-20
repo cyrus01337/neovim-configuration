@@ -1,5 +1,3 @@
-local mode = require("custom.lib.mode")
-
 return {
     {
         "christoomey/vim-tmux-navigator",
@@ -15,9 +13,11 @@ return {
             { "<leader><Left>", "<CMD>TmuxNavigateLeft<CR>" },
             { "<leader><Right>", "<CMD>TmuxNavigateRight<CR>" },
         },
+        config = true,
     },
     {
         "nvim-telescope/telescope-fzy-native.nvim",
+        config = true,
     },
     {
         "nvim-telescope/telescope.nvim",

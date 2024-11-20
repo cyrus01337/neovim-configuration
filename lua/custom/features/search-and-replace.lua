@@ -42,6 +42,12 @@ end
 return {
     "MagicDuck/grug-far.nvim",
     event = "BufReadPre",
+    keys = {
+        { "<C-f>", search(), mode = mode.ALL },
+        { "<C-h>", search(true), mode = mode.ALL, remap = true },
+        { "<CS-f>", search(nil, true), mode = mode.ALL },
+        { "<CS-h>", search(true, true), mode = mode.ALL },
+    },
     opts = {
         debounceMs = 100,
         keymaps = {
@@ -61,11 +67,5 @@ return {
             toggleShowCommand = false,
             swapEngine = false,
         },
-    },
-    keys = {
-        { "<C-f>", search(), mode = mode.ALL },
-        { "<C-h>", search(true), mode = mode.ALL, remap = true },
-        { "<CS-f>", search(nil, true), mode = mode.ALL },
-        { "<CS-h>", search(true, true), mode = mode.ALL },
     },
 }

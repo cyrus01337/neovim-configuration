@@ -144,20 +144,21 @@ return {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
         lazy = false,
-        config = true,
+        cmd = { "Mason" },
+        keys = {
+            { "<leader>l", ":Mason<CR>" },
+        },
         opts = {
             pip = {
                 upgrade_pip = true,
             },
             max_concurrent_installers = 10,
         },
-        keys = {
-            { "<leader>l", ":Mason<CR>" },
-        },
     },
     {
         "yaegassy/nette-neon.vim",
         event = { "BufReadPre", "BufNewFile" },
+        ft = "neon",
         config = true,
     },
     {
@@ -226,6 +227,7 @@ return {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
         build = "make install_jsregexp",
+        config = true,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -410,6 +412,7 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
+        cmd = { "TSInstall" },
         build = {
             ":TSInstall lua",
         },

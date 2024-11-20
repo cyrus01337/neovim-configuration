@@ -1,5 +1,3 @@
--- local mode = require("custom.lib.mode")
-
 return {
     "akinsho/toggleterm.nvim",
     version = "*",
