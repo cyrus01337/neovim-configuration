@@ -409,14 +409,25 @@ return {
     -- },
     {
         "stevearc/conform.nvim",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
-        cmd = { "TSInstall" },
         build = {
             ":TSInstall lua",
         },
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        lazy = true,
+        event = { "BufReadPre", "BufNewFile" },
         opts = {
+            formatters = {
+                ["php-cs-fixer"] = {
+                    command = "php-cs-fixer",
+                    args = {
+                        "fix",
+                        "$FILENAME",
+                    },
+                    stdin = false,
+                },
+            },
             formatters_by_ft = {
                 javascript = { "prettier" },
                 lua = { "stylua" },
@@ -428,6 +439,7 @@ return {
                 lsp_format = "fallback",
                 timeout_ms = 500,
             },
+            notify_on_error = true,
         },
     },
     {
