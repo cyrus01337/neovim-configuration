@@ -424,6 +424,7 @@ return {
                     args = {
                         "fix",
                         "$FILENAME",
+                        "--sequential",
                     },
                     stdin = false,
                 },
