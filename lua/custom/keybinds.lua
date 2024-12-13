@@ -86,12 +86,12 @@ set(mode.NORMAL, "<leader>v", string.format("<CMD>vsplit +%s<CR>", constants.FIL
 -- set(mode.NORMAL, "p", _pasteWithoutTrailingNewline)
 
 -- duplicate line
-set({ mode.NORMAL, mode.VISUAL }, "yp", function()
-    local reset_cursor_column = save_cursor_column()
-
-    vim.cmd("normal! yyp")
-    reset_cursor_column()
-end)
+-- set({ mode.NORMAL, mode.VISUAL }, "yp", function()
+--     local reset_cursor_column = save_cursor_column()
+--
+--     vim.cmd("normal! yyp")
+--     reset_cursor_column()
+-- end)
 
 -- select all
 set({ mode.NORMAL, mode.VISUAL }, "<C-a>", function()
