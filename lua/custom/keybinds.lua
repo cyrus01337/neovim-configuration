@@ -1,7 +1,6 @@
 -- TODO: Break out groups of keybinds into their own modules
 local constants = require("custom.lib.constants")
 local mode = require("custom.lib.mode")
-local symbol_surround = require("custom.lib.symbol-surround")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -162,19 +161,6 @@ set(mode.NORMAL, "<Tab>", ">>", { remap = true })
 set(mode.NORMAL, "<S-Tab>", "<<", { remap = true })
 set(mode.VISUAL, "<Tab>", ">gv", { remap = true })
 set(mode.VISUAL, "<S-Tab>", "<gv", { remap = true })
-
-local DOUBLE_QUOTES = "\""
-local QUOTES = "'"
-local GRAVES = "`"
-local PARENTHESES = { "(", ")" }
-local BRACKETS = { "[", "]" }
-
--- surround with symbols
-set({ mode.NORMAL, mode.VISUAL }, QUOTES, symbol_surround.create_callback_surrounding_with(QUOTES))
-set({ mode.NORMAL, mode.VISUAL }, DOUBLE_QUOTES, symbol_surround.create_callback_surrounding_with(DOUBLE_QUOTES))
-set({ mode.NORMAL, mode.VISUAL }, GRAVES, symbol_surround.create_callback_surrounding_with(GRAVES))
-set({ mode.NORMAL, mode.VISUAL }, "(", symbol_surround.create_callback_surrounding_with(PARENTHESES))
-set({ mode.NORMAL, mode.VISUAL }, "[", symbol_surround.create_callback_surrounding_with(BRACKETS))
 
 -- quit
 set(mode.NORMAL, "<leader>q", "<CMD>q<CR>")
