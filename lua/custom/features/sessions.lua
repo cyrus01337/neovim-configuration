@@ -6,11 +6,10 @@ return {
     end,
     opts = {
         auto_session_allowed_dirs = {
-            "~/",
-            "~/.config/{nvim,zsh}/",
-            "~/{bin,Playground}/",
-            "~/Projects/*/*/",
-            "/workspace",
+            "/workspace/",
+            "/workspace/.config/{fish,nvim}/",
+            "/workspace/{bin,Playground}/",
+            "/workspace/Projects/*/*/",
         },
         cwd_change_handling = {
             restore_upcoming_session = true,
