@@ -75,11 +75,11 @@ return {
         "folke/todo-comments.nvim",
         event = "BufEnter",
         dependencies = { "nvim-lua/plenary.nvim" },
+        config = true,
         keys = {
             { "<leader>ft", "<CMD>TodoTelescope<CR>", mode = mode.NORMAL },
             { "<C-t>", "<CMD>TodoTelescope<CR>", mode = { mode.NORMAL, mode.INSERT } },
         },
-        config = true,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -87,6 +87,12 @@ return {
         event = "BufEnter",
         config = true,
     },
+    -- {
+    --     "tris203/precognition.nvim",
+    --     opts = {
+    --         disabled_fts = { "netrw" },
+    --     },
+    -- },
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -123,5 +129,11 @@ return {
                 end,
             })
         end,
+    },
+    {
+        "brenoprata10/nvim-highlight-colors",
+        opts = {
+            enable_tailwind = true,
+        },
     },
 }

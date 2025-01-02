@@ -277,7 +277,13 @@ return {
                 experimental = {
                     ghost_text = true,
                 },
-                formatting = lsp.cmp_format({ details = true }),
+                formatting = {
+                    format = function(entry, item)
+                        lsp.cmp_format({ details = true })
+
+                        return require("nvim-highlight-colors").format(entry, item)
+                    end,
+                },
                 mapping = mapping,
                 snippets = {
                     expand = function(args)
@@ -408,6 +414,7 @@ return {
     },
     {
         "windwp/nvim-ts-autotag",
+        -- event = { "BufReadPre", "BufNewFile" },
         config = true,
     },
     {
