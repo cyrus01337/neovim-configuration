@@ -144,21 +144,20 @@ return {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
         lazy = false,
-        cmd = { "Mason" },
-        keys = {
-            { "<leader>l", ":Mason<CR>" },
-        },
+        config = true,
         opts = {
             pip = {
                 upgrade_pip = true,
             },
             max_concurrent_installers = 10,
         },
+        keys = {
+            { "<leader>l", ":Mason<CR>" },
+        },
     },
     {
         "yaegassy/nette-neon.vim",
         event = { "BufReadPre", "BufNewFile" },
-        ft = "neon",
         config = true,
     },
     {
@@ -201,21 +200,7 @@ return {
         "kylechui/nvim-surround",
         version = "*",
         event = "VeryLazy",
-        options = {
-            keymaps = {
-                -- insert = "<C-g>s",
-                -- insert_line = "<C-g>S",
-                normal = "s",
-                -- normal_cur = "yss",
-                -- normal_line = "yS",
-                -- normal_cur_line = "ySS",
-                -- visual = "S",
-                -- visual_line = "gS",
-                delete = "ds",
-                change = "cs",
-                -- change_line = "cS",
-            },
-        },
+        config = true,
     },
     {
         "numToStr/Comment.nvim",
@@ -241,7 +226,6 @@ return {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
         build = "make install_jsregexp",
-        config = true,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -373,7 +357,8 @@ return {
                     "mdx_analyzer",
 
                     --- back-end
-                    "phpactor",
+                    "phpstan",
+                    "php-cs-fixer",
                     "sqlls",
 
                     -- dev-ops
@@ -385,7 +370,6 @@ return {
                     "pyright",
                     "sourcery",
                     "lua_ls",
-                    "nixpkgs-fmt",
 
                     -- general
                     "gopls",
@@ -415,34 +399,26 @@ return {
             })
         end,
     },
-    -- {
-    --     "windwp/nvim-ts-autotag",
-    --     opts = {
-    --         enable_close_on_slash = true,
-    --     },
-    -- },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {
+            enable_check_bracket_line = false,
+        },
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        config = true,
+    },
     {
         "stevearc/conform.nvim",
-        build = {
-            ":TSInstall lua",
-        },
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
-        lazy = true,
-        event = { "BufReadPre", "BufNewFile" },
+        build = {
+            ":TSInstall lua",
+        },
         opts = {
-            formatters = {
-                ["php-cs-fixer"] = {
-                    command = "php-cs-fixer",
-                    args = {
-                        "fix",
-                        "$FILENAME",
-                        "--sequential",
-                    },
-                    stdin = false,
-                },
-            },
             formatters_by_ft = {
                 javascript = { "prettier" },
                 lua = { "stylua" },
@@ -454,7 +430,6 @@ return {
                 lsp_format = "fallback",
                 timeout_ms = 500,
             },
-            notify_on_error = true,
         },
     },
     {
